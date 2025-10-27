@@ -8,9 +8,12 @@ import cors from "cors"
 
 export const  app =  express();
 
+if(process.env.NODE_ENV != "Production"){
 config({
     path:"./.env",
 })
+}
+
 // all middlewares 
 // in middlewares order of declaring is also imp 
 
