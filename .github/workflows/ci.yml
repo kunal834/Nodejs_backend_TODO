@@ -31,7 +31,7 @@ jobs:
     # Step 4: Run your build script (crucial for React/Vite/TypeScript)
     # Step 5: Run your test cases with secrets injected
     - name: Execute test suites
-      run: npm test --if-present
+      run: npm test --if-present  
       env:
         # Syntax: VARIABLE_NAME: ${{ secrets.GITHUB_SECRET_NAME }}
         MONGO_URI: ${{ secrets.MONGO_URI }}
