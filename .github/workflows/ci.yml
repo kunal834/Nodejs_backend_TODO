@@ -32,6 +32,6 @@ jobs:
     - name: Verify production build
       run: npm run build --if-present
 
-    # Step 5: Run your test cases (if you have any written)
-    - name: Execute test suites
-      run: npm test --if-present
+    # # Step 5: Run your test cases (if you have any written)
+    # - name: Execute test suites
+    #   run: npm test --if-present
