@@ -1,0 +1,37 @@
+name: Node.js CI Baseline
+
+# 1. WHEN should this run?
+on:
+  push:
+    branches: [ main, master ]  # Triggers when you push to main or master
+  pull_request:
+    branches: [ main, master ]  # Triggers when someone opens a PR
+
+# 2. WHERE and WHAT should run?
+jobs:
+  verify-application:
+    runs-on: ubuntu-latest      # Spins up a clean, hosted Ubuntu Linux VM
+
+    steps:
+    # Step 1: Clone your repository code onto the Ubuntu VM
+    - name: Checkout repository code
+      uses: actions/checkout@v4
+
+    # Step 2: Set up the Node.js runtime environment
+    - name: Install Node.js runtime
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'       # Matches the Node version you use locally
+        cache: 'npm'            # Caches npm packages to make future builds faster
+
+    # Step 3: Clean install your dependencies (similar to npm install)
+    - name: Install dependencies
+      run: npm ci
+
+    # Step 4: Run your build script (crucial for React/Vite/TypeScript)
+    - name: Verify production build
+      run: npm run build --if-present
+
+    # Step 5: Run your test cases (if you have any written)
+    - name: Execute test suites
+      run: npm test --if-present
